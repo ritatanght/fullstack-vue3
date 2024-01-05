@@ -8,6 +8,14 @@ const upvoteApp = {
       return this.submissions.sort((a, b) => b.votes - a.votes);
     },
   },
+  methods: {
+    upvote(submissionId) {
+      const submission = this.submissions.find(
+        (sub) => sub.id === submissionId
+      );
+      submission.votes++;
+    },
+  },
 };
 
 Vue.createApp(upvoteApp).mount("#app");
