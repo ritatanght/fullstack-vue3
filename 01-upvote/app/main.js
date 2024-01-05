@@ -29,6 +29,8 @@ const submissionComponent = {
         </span>
       </div>
   `,
+  // For a child component to use the props provided to it, it needs to explictly declare the props
+  props: ["submission", "submissions"],
 };
 
 // instance options
