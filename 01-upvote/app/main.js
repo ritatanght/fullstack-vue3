@@ -31,6 +31,14 @@ const submissionComponent = {
   `,
   // For a child component to use the props provided to it, it needs to explictly declare the props
   props: ["submission", "submissions"],
+  methods: {
+    upvote(submissionId) {
+      const submission = this.submissions.find(
+        (sub) => sub.id === submissionId
+      );
+      submission.votes++;
+    },
+  },
 };
 
 // instance options
@@ -41,14 +49,6 @@ const upvoteApp = {
   computed: {
     sortedSubmissions() {
       return this.submissions.sort((a, b) => b.votes - a.votes);
-    },
-  },
-  methods: {
-    upvote(submissionId) {
-      const submission = this.submissions.find(
-        (sub) => sub.id === submissionId
-      );
-      submission.votes++;
     },
   },
   components: {
