@@ -1,5 +1,5 @@
 <template>
-  <div class="day-event" style="background-color: rgb(153, 255, 153)">
+  <div class="day-event" :style="getEventBackgroundColor">
     <div>
       <span class="has-text-centered details">{{ event.details }}</span>
       <div class="has-text-centered icons">
@@ -14,6 +14,14 @@
 export default {
   name: "CalendarEvent",
   props: ["day", "event"],
+  computed: {
+    // returns a random color from an array to be used as the bg color for an event
+    getEventBackgroundColor() {
+      const colors = ["#FF9999", "#85D6FF", "#99FF99"];
+      let randomColor = colors[Math.floor(Math.random() * colors.length)];
+      return `background-color: ${randomColor}`;
+    },
+  },
 };
 </script>
 
