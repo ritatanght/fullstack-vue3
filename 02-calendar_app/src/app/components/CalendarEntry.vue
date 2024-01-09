@@ -2,7 +2,12 @@
   <div id="calendar-entry">
     <!-- Markup for calendar entry -->
     <div class="calendar-entry-note">
-      <input type="text" placeholder="New Event" required />
+      <input
+        type="text"
+        placeholder="New Event"
+        v-model="inputEntry"
+        required
+      />
       <p class="calendar-entry-day">
         Day of event: <span class="bold">{{ titleOfActiveDay }}</span>
       </p>
@@ -15,6 +20,11 @@
 import { store } from "../store";
 export default {
   name: "CalendarEntry",
+  data() {
+    return {
+      inputEntry: "",
+    };
+  },
   computed: {
     // Return the full title of the returned day from the getActiveDay() method
     titleOfActiveDay() {
