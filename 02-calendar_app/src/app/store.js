@@ -22,4 +22,12 @@ export const store = {
     const activeDay = this.getActiveDay();
     activeDay.events.push({ details: eventDetails, edit: false });
   },
+  editEvent(dayId, eventDetails) {
+    const dayObj = this.state.data.find((day) => day.id === dayId);
+    const eventObj = dayObj.events.find(
+      (event) => event.details === eventDetails
+    );
+    // set the edit property for the target event to true
+    eventObj.edit = true;
+  },
 };
