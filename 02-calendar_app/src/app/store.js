@@ -24,10 +24,7 @@ export const store = {
   },
   editEvent(dayId, eventDetails) {
     this.resetEditOfAllEvents(); // this ensures only one event can be edited at a time
-    const dayObj = this.state.data.find((day) => day.id === dayId);
-    const eventObj = dayObj.events.find(
-      (event) => event.details === eventDetails
-    );
+    const eventObj = this.getEventObj(dayId, eventDetails);
     // set the edit property for the target event to true
     eventObj.edit = true;
   },
@@ -38,13 +35,14 @@ export const store = {
     });
   },
   updateEvent(dayId, originalEventDetails, newEventDetails) {
-    const dayObj = this.state.data((day) => day.id === dayId);
-    const eventObj = dayObj.events.find(
-      (event) => event.details === originalEventDetails
-    );
+    const eventObj = this.getEventObj(dayId, originalEventDetails);
     // set the event details to the new details
     eventObj.details = newEventDetails;
     // then turn of editing
     eventObj.edit = false;
+  },
+  getEventObj(dayId, eventDetails) {
+    const dayObj = this.state.data.find((day) => day.id === dayId);
+    return dayObj.events.find((event) => event.details === eventDetails);
   },
 };
