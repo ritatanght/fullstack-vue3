@@ -11,7 +11,7 @@
       </div>
     </div>
     <div v-else>
-      <input :placeholder="event.details" />
+      <input :placeholder="event.details" v-model="newEventDetails" />
       <div class="has-text-centered icons">
         <i
           class="fa fa-check"
@@ -37,7 +37,11 @@ export default {
       store.editEvent(dayId, eventDetails);
     },
     updateEvent(dayId, originalEventDetails, updatedEventDetails) {
+      // if the updatedEventDetails is empty,
+      // we’ll assume the user aims to keep his original event details
+      if (!updatedEventDetails) updatedEventDetails = originalEventDetails;
       store.updateEvent(dayId, originalEventDetails, updatedEventDetails);
+      this.newEventDetails = "";
     },
   },
   computed: {
