@@ -37,4 +37,14 @@ export const store = {
       dayObj.events.map((event) => (event.edit = false));
     });
   },
+  updateEvent(dayId, originalEventDetails, newEventDetails) {
+    const dayObj = this.state.data((day) => day.id === dayId);
+    const eventObj = dayObj.events.find(
+      (event) => event.details === originalEventDetails
+    );
+    // set the event details to the new details
+    eventObj.details = newEventDetails;
+    // then turn of editing
+    eventObj.edit = false;
+  },
 };
