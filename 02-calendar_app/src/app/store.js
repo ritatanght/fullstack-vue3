@@ -45,4 +45,11 @@ export const store = {
     const dayObj = this.state.data.find((day) => day.id === dayId);
     return dayObj.events.find((event) => event.details === eventDetails);
   },
+  deleteEvent(dayId, eventDetails) {
+    const dayObj = this.state.data.find((day) => day.id === dayId);
+    // filter out the event with the provided eventDetails
+    dayObj.events = dayObj.events.filter(
+      (event) => event.details !== eventDetails
+    );
+  },
 };
