@@ -5,7 +5,23 @@ const inputComponent = {
     };
   },
   props: ["placeholder"],
-  template: `<input class="input is-small" type="text" :placeholder="placeholder" v-model="input"/>`,
+  // recommended in Vue 3 to always document the events emitted in a component in `emits` property
+  emits: ["add-note"],
+  template: `<input class="input is-small" 
+                    type="text" 
+                    :placeholder="placeholder" 
+                    v-model="input"
+                    @keyup.enter="monitorEnterKey"
+                    />`,
+  methods: {
+    monitorEnterKey() {
+      this.$emit("add-note", {
+        note: this.input,
+        timestamp: new Date().toLocaleString(),
+      });
+      this.input = "";
+    },
+  },
 };
 const app = {
   data() {
