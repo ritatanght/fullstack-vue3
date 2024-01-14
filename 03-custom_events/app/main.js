@@ -37,7 +37,7 @@ const app = {
   methods: {
     addNote(event) {
       this.notes.push(event.note);
-      this.timestamp.push(event.timestamp);
+      this.timestamps.push(event.timestamp);
     },
   },
 };
