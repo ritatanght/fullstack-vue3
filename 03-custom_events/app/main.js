@@ -34,6 +34,12 @@ const app = {
   components: {
     "input-component": inputComponent,
   },
+  methods: {
+    addNote(event) {
+      this.notes.push(event.note);
+      this.timestamp.push(event.timestamp);
+    },
+  },
 };
 
 Vue.createApp(app).mount("#app");
