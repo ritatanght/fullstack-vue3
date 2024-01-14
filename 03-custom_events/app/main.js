@@ -1,5 +1,6 @@
 const inputComponent = {
-  template: `<input class="input is-small" type="text"/>`,
+  props: ["placeholder"],
+  template: `<input class="input is-small" type="text" :placeholder="placeholder"/>`,
 };
 const app = {
   data() {
