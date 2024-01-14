@@ -1,6 +1,11 @@
 const inputComponent = {
+  data() {
+    return {
+      input: "",
+    };
+  },
   props: ["placeholder"],
-  template: `<input class="input is-small" type="text" :placeholder="placeholder"/>`,
+  template: `<input class="input is-small" type="text" :placeholder="placeholder" v-model="input"/>`,
 };
 const app = {
   data() {
