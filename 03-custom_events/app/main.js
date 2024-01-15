@@ -33,6 +33,9 @@ const noteCountComponent = {
       noteCount: 0,
     };
   },
+  created() {
+    emitter.on("add-note", () => this.noteCount++);
+  },
 };
 
 const app = {
