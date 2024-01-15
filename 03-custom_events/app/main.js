@@ -1,3 +1,5 @@
+const emitter = mitt();
+
 const inputComponent = {
   data() {
     return {
@@ -15,7 +17,7 @@ const inputComponent = {
                     />`,
   methods: {
     monitorEnterKey() {
-      this.$emit("add-note", {
+      emitter.emit("add-note", {
         note: this.input,
         timestamp: new Date().toLocaleString(),
       });
@@ -39,6 +41,9 @@ const app = {
       this.notes.push(event.note);
       this.timestamps.push(event.timestamp);
     },
+  },
+  created() {
+    emitter.on("add-note", (event) => this.addNote(event));
   },
 };
 
