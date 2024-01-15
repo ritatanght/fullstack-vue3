@@ -25,6 +25,16 @@ const inputComponent = {
     },
   },
 };
+
+const noteCountComponent = {
+  template: `<div class="note-count">Note count: <strong>{{ noteCount }}</strong></div>`,
+  data() {
+    return {
+      noteCount: 0,
+    };
+  },
+};
+
 const app = {
   data() {
     return {
@@ -35,6 +45,7 @@ const app = {
   },
   components: {
     "input-component": inputComponent,
+    "note-count-component": noteCountComponent,
   },
   methods: {
     addNote(event) {
