@@ -33,3 +33,11 @@ const actions = {
     context.commit("ADD_TIMESTAMP", payload);
   },
 };
+
+//  Getters are used to derive computed information from store state.
+// getter fy=unctions reeive state as their first argyment
+const getters = {
+  getNotes: (state) => state.notes,
+  getTimestamps: (state) => state.timestamps,
+  getNoteCount: (state) => state.notes.length,
+};
