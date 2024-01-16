@@ -15,3 +15,21 @@ const mutations = {
     state.timestamps.push(payload);
   },
 };
+
+// Actions are functions that exist to call mutations
+// actions can perform asynchronous calls/logic handling before committing to mutations
+
+/* actions automatically receive context as the first argument
+  an optional payload object is passed in as a second argument
+  context.state - access the state,
+  context.getters - access getters, and
+  context.commit - call/commit to mutations
+*/
+const actions = {
+  addNote(context, payload) {
+    context.commit("ADD_NOTE", payload);
+  },
+  addTimestamp(context, payload) {
+    context.commit("ADD_TIMESTAMP", payload);
+  },
+};
