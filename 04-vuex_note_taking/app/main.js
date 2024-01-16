@@ -41,3 +41,17 @@ const getters = {
   getTimestamps: (state) => state.timestamps,
   getNoteCount: (state) => state.notes.length,
 };
+
+const store = Vuex.createStore({
+  state,
+  mutations,
+  actions,
+  getters,
+});
+
+const app = Vue.createApp({
+  components: {},
+});
+
+app.use(store);
+app.mount("#app");
