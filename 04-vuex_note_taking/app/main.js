@@ -1,3 +1,24 @@
+const inputComponent = {
+  data() {
+    return {
+      input: "",
+    };
+  },
+  template: `<input class="input is-small" 
+                    type="text" 
+                    placeholder="Enter a note" 
+                    v-model="input"
+                    @keyup.enter="monitorEnterKey"
+                    />`,
+  methods: {
+    monitorEnterKey() {
+      this.$store.dispatch("addNote", this.input);
+      this.$store.dispatch("addTimestamp", new Date().toLocaleString());
+      this.input = "";
+    },
+  },
+};
+
 const state = {
   notes: [],
   timestamps: [],
@@ -50,7 +71,9 @@ const store = Vuex.createStore({
 });
 
 const app = Vue.createApp({
-  components: {},
+  components: {
+    "input-component": inputComponent,
+  },
 });
 
 app.use(store);
