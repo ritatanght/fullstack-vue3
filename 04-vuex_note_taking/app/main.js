@@ -66,8 +66,8 @@ const actions = {
   },
 };
 
-//  Getters are used to derive computed information from store state.
-// getter fy=unctions reeive state as their first argyment
+// Getters are used to derive computed information from store state.
+// getter functions receive state as their first argument
 const getters = {
   getNotes: (state) => state.notes,
   getTimestamps: (state) => state.timestamps,
