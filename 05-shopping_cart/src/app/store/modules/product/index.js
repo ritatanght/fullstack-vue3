@@ -14,7 +14,9 @@ const actions = {
     }); // should commit to unique mutations when asynchronous call fails
   },
 };
-const getters = {};
+const getters = {
+  productItems: (state) => state.productItems,
+};
 
 const productModule = {
   state,
