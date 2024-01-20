@@ -7,13 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "server":  "node server.cjs",
+    "server": "node server.cjs",
     "start": "concurrently \"npm run server\" \"npm run dev\""
   },
   "dependencies": {
-    "vue": "^3.3.11",
     "axios": "^0.17.1",
-    "vuex": "^2.0.0"
+    "vue": "^3.0.0",
+    "vuex": "^4.0.0-0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
