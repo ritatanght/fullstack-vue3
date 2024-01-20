@@ -1,3 +1,4 @@
+import axios from "axios";
 const state = {
   productItems: [],
 };
@@ -6,7 +7,13 @@ const mutations = {
     state.productItems = payload;
   },
 };
-const actions = {};
+const actions = {
+  getProductItems({ commit }) {
+    axios.get("/api/products").then((res) => {
+      commit("UPDATE_PRODUCT_ITEMS", res.data);
+    }); // should commit to unique mutations when asynchronous call fails
+  },
+};
 const getters = {};
 
 const productModule = {
