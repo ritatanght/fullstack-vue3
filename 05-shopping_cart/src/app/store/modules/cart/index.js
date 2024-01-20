@@ -3,7 +3,7 @@ const mutations = {};
 const actions = {};
 const getters = {};
 
-const cardModule = {
+const cartModule = {
   state,
   mutations,
   actions,
