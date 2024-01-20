@@ -1,5 +1,11 @@
-const state = {};
-const mutations = {};
+const state = {
+  productItems: [],
+};
+const mutations = {
+  UPDATE_PRODUCT_ITEMS(state, payload) {
+    state.productItems = payload;
+  },
+};
 const actions = {};
 const getters = {};
 
