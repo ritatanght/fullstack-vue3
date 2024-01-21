@@ -15,7 +15,7 @@
           Total Quantity:
           <span class="has-text-weight-bold">{{ cartQuantity }}</span>
         </p>
-        <p class="cart-remove-all--text">
+        <p class="cart-remove-all--text" @click="removeAllCartItems">
           <i class="fa fa-trash"></i>Remove all
         </p>
       </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import CartListItem from "./CartListItem.vue";
 export default {
   name: "CartList",
@@ -37,6 +37,9 @@ export default {
   },
   computed: {
     ...mapGetters(["cartItems", "cartTotal", "cartQuantity"]),
+  },
+  methods: {
+    ...mapActions(["removeAllCartItems"]),
   },
   components: { CartListItem },
 };
