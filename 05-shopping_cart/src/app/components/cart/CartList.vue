@@ -3,7 +3,10 @@
     <div class="cart--header has-text-centered">
       <i class="fa fa-2x fa-shopping-cart"></i>
     </div>
-    <ul>
+    <p v-if="!cartItems.length" class="cart-empty-text has-text-centered">
+      Add some item to the cart!
+    </p>
+    <ul v-if="cartItems.length > 0">
       <li v-for="cartItem in cartItems" :key="cartItem" class="cart-item">
         <CartListItem :cartItem="cartItem" />
       </li>
@@ -17,7 +20,7 @@
         </p>
       </div>
     </ul>
-    <button class="button is-primary">
+    <button class="button is-primary" :disabled="!cartItems.length">
       Checkout (<span class="has-text-weight-bold">${{ cartTotal }}</span
       >)
     </button>
@@ -75,5 +78,4 @@ export default {
 .cart-remove-all--text .fa {
   padding-right: 5px;
 }
-
 </style>
