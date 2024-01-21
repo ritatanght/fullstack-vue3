@@ -37,8 +37,15 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "CartList",
+  created() {
+    this.$store.dispatch("getCartItems");
+  },
+  computed: {
+    ...mapGetters(["cartItems, cartTotal, cartQuantity"]),
+  },
 };
 </script>
 
