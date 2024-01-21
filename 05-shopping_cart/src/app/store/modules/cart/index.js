@@ -31,7 +31,15 @@ const actions = {
     });
   },
 };
-const getters = {};
+const getters = {
+  cartItems: (state) => state.cartItems,
+  cartTotal: (state) =>
+    state.cartItems
+      .reduce((acc, item) => acc + item.quantity * item.price, 0)
+      .toFixed(2),
+  cartQuantity: (state) =>
+    state.cartItems.reduce((acc, item) => acc + item.quantity, 0),
+};
 
 const cartModule = {
   state,
