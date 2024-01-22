@@ -22,7 +22,11 @@ const InputForm = {
         <div class="field">
           <label>New Item</label>
           <input v-model="fields.newItem" type="text" placeholder="Add an item!" />
+          <span style="float: right">{{ fields.newItem.length }}/20</span>
           <span style="color: red">{{ fieldErrors.newItem }}</span>
+          <span v-if="isNewItemInputLimitExceeded" style="color: red; display: block">
+            Must be under twenty characters
+          <span>
         </div>
         <div class="field">
           <label>Email</label>
@@ -85,6 +89,11 @@ const InputForm = {
     isEmail(email) {
       const regex = /\S+@\S+\.\S+/;
       return regex.test(email);
+    },
+  },
+  computed: {
+    isNewItemInputLimitExceeded() {
+      return this.fields.newItem.length >= 20;
     },
   },
 };
