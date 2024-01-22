@@ -42,6 +42,7 @@ const InputForm = {
             <option>Urgent</option>
           </select>
           <span style="color: red">{{ fieldErrors.urgency }}</span>
+          <span v-if="isNotUrgent" style="color: red; display: block">Must be moderate to urgent</span>
         </div>
         <div class="field">
           <div class="ui checkbox">
@@ -50,7 +51,7 @@ const InputForm = {
           <span style="color: red">{{ fieldErrors.termsAndConditions }}</span>
           </div>
         </div>
-        <button class="ui button">Submit</button>
+        <button class="ui button" :disabled="isNewItemInputLimitExceeded || isNotUrgent">Submit</button>
       </form>
       <div class="ui segment">
         <h4 class="ui header">Items</h4>
@@ -94,6 +95,9 @@ const InputForm = {
   computed: {
     isNewItemInputLimitExceeded() {
       return this.fields.newItem.length >= 20;
+    },
+    isNotUrgent() {
+      return this.fields.urgency === "Nonessential";
     },
   },
 };
