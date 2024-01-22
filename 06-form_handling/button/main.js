@@ -14,8 +14,6 @@ const ButtonRow = {
   },
 };
 
-const app = {
+Vue.createApp({
   components: { ButtonRow },
-};
-
-Vue.createApp(app).mount("#app");
+}).mount("#app");
