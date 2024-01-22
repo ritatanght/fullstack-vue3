@@ -7,7 +7,13 @@ const InputForm = {
         </div>
         <button class="ui button">Submit</button>
       </form>
-    <div>`,
+    </div>`,
+  methods: {
+    submitForm(event) {
+      event.preventDefault();
+      console.log(this.$refs.newItem.value);
+    },
+  },
 };
 
 Vue.createApp({ components: { InputForm } }).mount("#app");
