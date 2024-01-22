@@ -59,8 +59,32 @@ const InputForm = {
   methods: {
     submitForm(event) {
       event.preventDefault();
-      this.items.push(this.newItem);
-      this.newItem = "";
+
+      this.fieldErrors = this.validateForm(this.fields);
+      if (Object.keys(this.fieldErrors).length) return;
+
+      this.items.push(this.fields.newItem);
+      this.fields.newItem = "";
+      this.fields.email = "";
+      this.fields.urgency = "";
+      this.fields.termsAndConditions = false;
+    },
+    validateForm(fields) {
+      const errors = {};
+      if (!fields.newItem) errors.newItem = "New Item Required";
+      if (!fields.email) errors.email = "Email Required";
+      if (!fields.urgency) errors.urgency = "Urgency Required";
+      if (!fields.termsAndConditions) {
+        errors.termsAndConditions = "Terms and conditions have to be approved";
+      }
+      if (fields.email && !this.isEmail(fields.email)) {
+        errors.email = "Invalid Email";
+      }
+      return errors;
+    },
+    isEmail(email) {
+      const regex = /\S+@\S+\.\S+/;
+      return regex.test(email);
     },
   },
 };
