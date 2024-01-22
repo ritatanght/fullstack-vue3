@@ -7,6 +7,12 @@ const InputForm = {
         urgency: "",
         termsAndConditions: false,
       },
+      fieldErrors: {
+        newItem: undefined,
+        email: undefined,
+        urgency: undefined,
+        termsAndConditions: undefined,
+      },
       items: [],
     };
   },
@@ -16,10 +22,12 @@ const InputForm = {
         <div class="field">
           <label>New Item</label>
           <input v-model="fields.newItem" type="text" placeholder="Add an item!" />
+          <span style="color: red">{{ fieldErrors.newItem }}</span>
         </div>
         <div class="field">
           <label>Email</label>
           <input v-model="fields.email" type="text" placeholder="What's your email?"/>
+          <span style="color: red">{{ fieldErrors.email }}</span>
         </div>
         <div class="field">
           <label>Urgency</label>
@@ -29,11 +37,13 @@ const InputForm = {
             <option>Moderate</option>
             <option>Urgent</option>
           </select>
+          <span style="color: red">{{ fieldErrors.urgency }}</span>
         </div>
         <div class="field">
           <div class="ui checkbox">
           <input v-model="fields.termsAndConditions" type="checkbox" />
           <label>I accept the terms and conditions</label>
+          <span style="color: red">{{ fieldErrors.termsAndConditions }}</span>
           </div>
         </div>
         <button class="ui button">Submit</button>
