@@ -14,6 +14,8 @@ const InputForm = {
         termsAndConditions: undefined,
       },
       items: [],
+      loading: false,
+      saveStatus: "READY", // 4 poosible values: “READY”, “SAVING”, “SUCCESS”, and “ERROR”.
     };
   },
   template: `
@@ -26,7 +28,7 @@ const InputForm = {
           <span style="color: red">{{ fieldErrors.newItem }}</span>
           <span v-if="isNewItemInputLimitExceeded" style="color: red; display: block">
             Must be under twenty characters
-          <span>
+          </span>
         </div>
         <div class="field">
           <label>Email</label>
@@ -68,11 +70,22 @@ const InputForm = {
       this.fieldErrors = this.validateForm(this.fields);
       if (Object.keys(this.fieldErrors).length) return;
 
-      this.items.push(this.fields.newItem);
-      this.fields.newItem = "";
-      this.fields.email = "";
-      this.fields.urgency = "";
-      this.fields.termsAndConditions = false;
+      const items = [...this.items, this.fields.newItem];
+      this.saveStatus = "SAVING";
+      apiClient
+        .saveItems(items)
+        .then(() => {
+          this.items = items;
+          this.fields.newItem = "";
+          this.fields.email = "";
+          this.fields.urgency = "";
+          this.fields.termsAndConditions = false;
+          this.saveStatus = "SUCCESS";
+        })
+        .catch((err) => {
+          console.log(err);
+          this.saveStatus = "ERROR";
+        });
     },
     validateForm(fields) {
       const errors = {};
@@ -99,6 +112,38 @@ const InputForm = {
     isNotUrgent() {
       return this.fields.urgency === "Nonessential";
     },
+  },
+  created() {
+    this.loading = true;
+    apiClient.loadItems().then((items) => {
+      this.items = items;
+      this.loading = false;
+    });
+  },
+};
+
+let apiClient = {
+  count: 1,
+  loadItems: () => {
+    return {
+      then: (cb) => {
+        setTimeout(() => {
+          cb(JSON.parse(localStorage.items || "[]"));
+        }, 1000);
+      },
+    };
+  },
+  saveItems: function (items) {
+    const success = !!(this.count++ % 2);
+
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (!success) return reject({ success });
+
+        localStorage.items = JSON.stringify(items);
+        return resolve({ success });
+      }, 1000);
+    });
   },
 };
 
