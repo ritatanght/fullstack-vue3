@@ -1,4 +1,12 @@
-const state = {};
+const state = {
+  fields: {
+    newItem: "",
+    email: "",
+    urgency: "",
+    termsAndConditions: false,
+  },
+  items: [],
+};
 
 const mutations = {};
 

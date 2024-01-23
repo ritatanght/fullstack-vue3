@@ -1,19 +1,14 @@
+import store from "./store";
+
 const InputForm = {
   data() {
     return {
-      fields: {
-        newItem: "",
-        email: "",
-        urgency: "",
-        termsAndConditions: false,
-      },
       fieldErrors: {
         newItem: undefined,
         email: undefined,
         urgency: undefined,
         termsAndConditions: undefined,
       },
-      items: [],
       loading: false,
       saveStatus: "READY", // 4 poosible values: “READY”, “SAVING”, “SUCCESS”, and “ERROR”.
     };
@@ -138,6 +133,4 @@ const InputForm = {
   },
 };
 
-
-
-Vue.createApp({ components: { InputForm } }).mount("#app");
+Vue.createApp({ components: { InputForm } }).use(store).mount("#app");
