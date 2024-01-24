@@ -34,7 +34,16 @@ const mutations = {
 
 const actions = {};
 
-const getters = {};
+const getters = {
+  newItem: (state) => state.fields.newItem,
+  newItemLength: (state) => state.fields.newItem.length,
+  isNewItemInputLimitExceeded: (state) => state.fields.newItem.length >= 20,
+  email: (state) => state.fields.email,
+  urgency: (state) => state.fields.urgency,
+  isNotUrgent: (state) => state.fields.urgency === "Nonessential",
+  termsAndConditions: (state) => state.fields.termsAndConditions,
+  items: (state) => state.items,
+};
 
 // globalize the store with window.store for it to be accessed elsewhere
 window.store = Vuex.createStore({
