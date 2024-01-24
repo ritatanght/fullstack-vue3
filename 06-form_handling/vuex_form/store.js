@@ -32,7 +32,19 @@ const mutations = {
   },
 };
 
-const actions = {};
+const actions = {
+  loadItems({ commit }, payload) {
+    apiClient.loadItems().then((items) => {
+      commit("UPDATE_ITEMS", items);
+    });
+  },
+  saveItems({ commit }, payload) {
+    apiClient.saveItems(payload).then(() => {
+      commit("UPDATE_ITEMS", payload);
+      commit("CLEAR_FIELDS");
+    });
+  },
+};
 
 const getters = {
   newItem: (state) => state.fields.newItem,
