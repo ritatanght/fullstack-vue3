@@ -18,7 +18,7 @@ const InputForm = {
       <form @submit="submitForm" class="ui form">
         <div class="field">
           <label>New Item</label>
-          <input v-model="fields.newItem" type="text" placeholder="Add an item!" />
+          <input :value="newItem" @input="onInputChange" type="text" placeholder="Add an item!" />
           <span style="float: right">{{ fields.newItem.length }}/20</span>
           <span style="color: red">{{ fieldErrors.newItem }}</span>
           <span v-if="isNewItemInputLimitExceeded" style="color: red; display: block">
@@ -115,15 +115,13 @@ const InputForm = {
       const regex = /\S+@\S+\.\S+/;
       return regex.test(email);
     },
-  },
-  computed: {
-    isNewItemInputLimitExceeded() {
-      return this.fields.newItem.length >= 20;
-    },
-    isNotUrgent() {
-      return this.fields.urgency === "Nonessential";
+    onInputChange(event) {
+      this.$store.commit("UPDATE_INPUT", event.target.value);
     },
   },
+  computed: Vuex.mapGetters({
+    newItem: "newItem",
+  }),
   created() {
     this.loading = true;
     apiClient.loadItems().then((items) => {
