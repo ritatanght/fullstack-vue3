@@ -156,10 +156,12 @@ const InputForm = {
   }),
   created() {
     this.loading = true;
-    apiClient.loadItems().then((items) => {
-      this.items = items;
-      this.loading = false;
-    });
+    this.$store
+      .dispatch("loadItems")
+      .then((res) => {
+        this.loading = false;
+      })
+      .catch(console.log);
   },
 };
 
