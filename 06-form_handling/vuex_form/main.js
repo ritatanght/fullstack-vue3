@@ -119,6 +119,13 @@ const InputForm = {
   },
   computed: Vuex.mapGetters({
     newItem: "newItem",
+    newItemLength: "newItemLength",
+    isNewItemInputLimitExceeded: "isNewItemInputLimitExceeded",
+    email: "email",
+    urgency: "urgency",
+    isNotUrgent: "isNotUrgent",
+    termsAndConditions: "termsAndConditions",
+    items: "items",
   }),
   created() {
     this.loading = true;
