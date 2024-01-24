@@ -34,14 +34,26 @@ const mutations = {
 
 const actions = {
   loadItems({ commit }, payload) {
-    apiClient.loadItems().then((items) => {
-      commit("UPDATE_ITEMS", items);
+    return new Promise((resolve, reject) => {
+      apiClient.loadItems().then(
+        (items) => {
+          commit("UPDATE_ITEMS", items);
+          resolve(items);
+        },
+        (error) => reject(error)
+      );
     });
   },
   saveItems({ commit }, payload) {
-    apiClient.saveItems(payload).then(() => {
-      commit("UPDATE_ITEMS", payload);
-      commit("CLEAR_FIELDS");
+    return new Promise((resolve, reject) => {
+      apiClient.saveItems(payload).then(
+        (res) => {
+          commit("UPDATE_ITEMS", payload);
+          commit("CLEAR_FIELDS");
+          resolve(res);
+        },
+        (error) => reject(error)
+      );
     });
   },
 };
