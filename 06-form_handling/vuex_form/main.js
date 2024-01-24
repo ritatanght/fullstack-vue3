@@ -23,7 +23,7 @@ const InputForm = {
             type="text" 
             placeholder="Add an item!" 
           />
-          <span style="float: right">{{ fields.newItem.length }}/20</span>
+          <span style="float: right">{{ newItemLength }}/20</span>
           <span style="color: red">{{ fieldErrors.newItem }}</span>
           <span v-if="isNewItemInputLimitExceeded" style="color: red; display: block">
             Must be under twenty characters
@@ -98,7 +98,7 @@ const InputForm = {
     submitForm(event) {
       event.preventDefault();
 
-      this.fieldErrors = this.validateForm(this.fields);
+      this.fieldErrors = this.validateForm(this.$store.state.fields);
       if (Object.keys(this.fieldErrors).length) return;
 
       const items = [
