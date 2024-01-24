@@ -101,18 +101,14 @@ const InputForm = {
       this.fieldErrors = this.validateForm(this.fields);
       if (Object.keys(this.fieldErrors).length) return;
 
-      const items = [...this.items, this.fields.newItem];
+      const items = [
+        ...this.$store.state.fields.items,
+        this.$store.state.fields.newItem,
+      ];
       this.saveStatus = "SAVING";
-      apiClient
-        .saveItems(items)
-        .then(() => {
-          this.items = items;
-          this.fields.newItem = "";
-          this.fields.email = "";
-          this.fields.urgency = "";
-          this.fields.termsAndConditions = false;
-          this.saveStatus = "SUCCESS";
-        })
+      this.$store
+        .dispatch("saveItems", items)
+        .then(() => (this.saveStatus = "SUCCESS"))
         .catch((err) => {
           console.log(err);
           this.saveStatus = "ERROR";
