@@ -32,9 +32,6 @@ import { mapGetters, mapActions } from "vuex";
 import CartListItem from "./CartListItem.vue";
 export default {
   name: "CartList",
-  created() {
-    this.$store.dispatch("getCartItems");
-  },
   computed: {
     ...mapGetters(["cartItems", "cartTotal", "cartQuantity"]),
   },

@@ -24,9 +24,6 @@ import ProductListItem from "./ProductListItem.vue";
 
 export default {
   name: "ProductList",
-  created() {
-    this.$store.dispatch("getProductItems");
-  },
   computed: {
     ...mapGetters([
       // map this.productItems to this.$store.getters.productItems
