@@ -1,6 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
+import CartList from "../components/cart/CartList.vue";
+import ProductList from "../components/product/ProductList.vue";
 
 const router = createRouter({
   history: createWebHistory(), // in HTML5 history mode, (no hashes in URL)
-  routes: [],
+  routes: [
+    {
+      path: "/products",
+      component: ProductList,
+    },
+    { path: "/cart", component: CartList },
+    { path: "/", redirect: "/products" },
+  ],
 });
