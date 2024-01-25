@@ -1,13 +1,49 @@
 <template>
-  <section id="product-item" class="box">
-    <div class="product-item__details">Product Item</div>
-    <div class="product-item__image"></div>
+  <section id="product-item" class="box" v-if="productItem">
+    <span class="return-icon" @click="$router.go(-1)">
+      <i class="fa fa-arrow-left is-primary"></i>
+    </span>
+    <div class="product-item__details">
+      <h1 class="title is-4">
+        <p>{{ productItem.title }}</p>
+        <span class="tag product-item__tag">{{
+          productItem.product_type
+        }}</span>
+      </h1>
+      <p class="product-item__description">{{ productItem.description }}</p>
+      <p class="product-item__created_at">
+        Founded:
+        <span class="has-text-weight-bold"> {{ productItem.created_at }} </span>
+      </p>
+      <button
+        class="button is-primary product-item__button"
+        @click="addAndGoToCart(productItem)"
+      >
+        Add to Cart
+      </button>
+    </div>
+    <div class="product-item__image">
+      <img :src="`/assets/${productItem.image_tag}`" />
+    </div>
   </section>
 </template>
 
 <script>
 export default {
   name: "ProductItem",
+  props: ["id"],
+  computed: {
+    productItem() {
+      return this.$store.getters.productItemFromId(Number(this.id));
+    },
+  },
+  methods: {
+    addAndGoToCart(productItem) {
+      this.$store.dispatch("addCartItem", productItem).then(
+        () => this.$router.push("/cart") //  navigate to the cart only after adding item
+      );
+    },
+  },
 };
 </script>
 
