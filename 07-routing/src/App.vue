@@ -6,8 +6,11 @@ export default {
     ...mapGetters(["cartQuantity"]),
   },
   created() {
-    this.$store.dispatch("getCartItems");
-    this.$store.dispatch("getProductItems");
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.$store.dispatch("getCartItems", token);
+      this.$store.dispatch("getProductItems", token);
+    }
   },
 };
 </script>

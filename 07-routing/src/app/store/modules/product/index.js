@@ -8,8 +8,8 @@ const mutations = {
   },
 };
 const actions = {
-  getProductItems({ commit }) {
-    axios.get("/api/products").then((res) => {
+  getProductItems({ commit }, token) {
+    axios.get(`/api/products?token=${token}`).then((res) => {
       commit("UPDATE_PRODUCT_ITEMS", res.data);
     }); // should commit to unique mutations when asynchronous call fails
   },
