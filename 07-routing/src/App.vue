@@ -39,7 +39,7 @@ export default {
 </script>
 
 <template>
-  <div class="navigation-buttons">
+  <div v-if="$route.path !== '/login'" class="navigation-buttons">
     <button @click="logout" class="button is-text is-pulled-left">
       Logout
     </button>
