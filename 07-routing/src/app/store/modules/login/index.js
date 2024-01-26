@@ -20,7 +20,7 @@ const mutations = {
 const actions = {
   login({ commit }) {
     commit("LOGIN_PENDING");
-    axios.post("/api/login").then((res) => {
+    return axios.post("/api/login").then((res) => {
       localStorage.setItem("token", res.data.token);
       commit("SET_TOKEN", res.data.token);
       commit("LOGIN_SUCCESS");
